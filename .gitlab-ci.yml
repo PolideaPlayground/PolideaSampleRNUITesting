@@ -1,0 +1,49 @@
+cache:
+  key:
+  
+stages:
+  - build
+  - test
+  - deploy
+
+after_script:
+  - (if [ "$(lsof -n -i4TCP:2137)" != "" ]; then kill -9 $(lsof -n -i4TCP:2137); else echo "Cleaned"; exit 33; fi);
+
+
+detox_test:iOS:
+    stage: test
+    before_script:
+      - brew tap wix/brew
+      - brew install --HEAD applesimutils
+      - npm install -g detox-cli
+      - npm install -g react-native-cli
+      - npm install
+    script:
+        - react-native start --port 2137 &
+        - detox build -c ios.sim.debug 
+        - detox test -c ios.sim.debug
+        - kill -9 $(lsof -n -i4TCP:2137) 
+    tags:
+        - xcode-9.2
+
+detox_test:android:
+  stage: test
+  services:
+  -   name: android-emulator:latest
+      alias: pixel
+      entrypoint: ["/start-emulator.sh", "android-23", "x86", "pixel"]
+  before_script:
+    - adb connect pixel:5555; sh ./scripts/waitForDevice.sh pixel 
+    - mkdir -p ./detox_node/
+    - npm install --prefix ./detox_node/ -g detox-cli
+    - npm install --prefix ./detox_node/ -g react-native-cli
+    - npm install
+  script:
+    - ./detox_node/bin/react-native start --port 2137 &
+    - ./detox_node/bin/detox build -c android.emu.debug
+    - ./detox_node/bin/detox test -c android.emu.debug
+    - kill -9 $(lsof -n -i4TCP:2137) 
+  tags:
+    - android-emu
+  
+
