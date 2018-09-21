@@ -15,8 +15,8 @@
     "preset": "react-native"
   },
   "devDependencies": {
-    "detox": "7.0.1",
-    "mocha": "^4.0.1"
+    "detox": "^9.0.1",
+    "mocha": "^5.2.0"
   },
   "detox": {
     "configurations": {
