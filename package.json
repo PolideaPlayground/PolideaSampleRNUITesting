@@ -8,15 +8,17 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
+    "blink-diff": "^1.0.13",
     "react": "16.3.1",
-    "react-native": "0.56.0"
+    "react-native": "0.55.0"
   },
   "jest": {
     "preset": "react-native"
   },
   "devDependencies": {
-    "detox": "^9.0.1",
-    "mocha": "^5.2.0"
+    "detox": "^9.0.5",
+    "mocha": "^5.2.0",
+    "react-native-repackager": "^0.51.1"
   },
   "detox": {
     "configurations": {
@@ -24,7 +26,7 @@
         "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/PolideaSample.app",
         "build": "xcodebuild -project ios/PolideaSample.xcodeproj -scheme PolideaSample -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
         "type": "ios.simulator",
-        "name": "iPhone 6s Plus"
+        "name": "iPhone 6"
       },
       "android.emu.debug": {
         "binaryPath": "android/app/build/outputs/apk/debug/app-debug.apk",

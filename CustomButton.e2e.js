@@ -26,7 +26,7 @@ class CustomButton extends Component {
 			 	accessibilityLabel= {"ButtonTextDesc"}
 			 	style={styles.textStyle}>
 
-				 {!this.state.clicked? defaultButtonText: "Podlasie"}
+				 {!this.state.clicked? defaultButtonText: "MOCK"}
 
 			 </Text>
 			 <Image
