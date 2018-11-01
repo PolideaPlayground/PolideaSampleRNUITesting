@@ -22,16 +22,16 @@ class CustomButton extends Component {
 
 			 <Text
 			 	accessible= {true}
-			 	testID= {"ButtonText"}
-			 	accessibilityLabel= {"ButtonTextDesc"}
+			 	testID= {"button_text"}
+			 	accessibilityLabel= {"button_text_desc"}
 			 	style={styles.textStyle}>
 
-				 {!this.state.clicked? defaultButtonText: "Podlasie"}
+				 {!this.state.clicked? defaultButtonText: "Polidea"}
 
 			 </Text>
 			 <Image
 					accessible={true}
-					testID='ButtonImage'
+					testID='button_image'
           style={!this.state.clicked ? styles.imageStyleDefault : styles.imageStyle}
           source={{uri:'https://pbs.twimg.com/profile_images/580677325974536192/oP6A55eF_400x400.png'}}
           />

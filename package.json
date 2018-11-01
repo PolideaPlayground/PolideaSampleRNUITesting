@@ -4,7 +4,11 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "env:android": "npm install -g detox-cli && npm install -g react-native-cli && npm install",
+    "env:ios": "brew tap wix/brew && brew install --HEAD applesimutils || echo 'appleSimUtils exists '&& npm install -g detox-cli && npm install -g react-native-cli && npm install",
+    "detox:android": "react-native start --port 2137 & detox build -c android.emu.debug && detox test -c android.emu.debug && kill -9 $(lsof -n -i4TCP:2137)",
+    "detox:ios": "react-native start --port 2137 & detox build -c ios.sim.debug && detox test -c ios.sim.debug && kill -9 $(lsof -n -i4TCP:2137)"
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
@@ -16,8 +20,10 @@
     "preset": "react-native"
   },
   "devDependencies": {
-    "detox": "^9.0.5",
+    "detox": "9.0.1",
     "mocha": "^5.2.0",
+    "mochawesome": "^3.1.1",
+    "mochawesome-report-generator": "^3.1.4",
     "react-native-repackager": "^0.51.1"
   },
   "detox": {
@@ -26,7 +32,7 @@
         "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/PolideaSample.app",
         "build": "xcodebuild -project ios/PolideaSample.xcodeproj -scheme PolideaSample -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
         "type": "ios.simulator",
-        "name": "iPhone 6"
+        "name": "iPhone 7"
       },
       "android.emu.debug": {
         "binaryPath": "android/app/build/outputs/apk/debug/app-debug.apk",
