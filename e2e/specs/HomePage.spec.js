@@ -1,6 +1,5 @@
 const HomePage = require('../pages/HomePage.js')
 const PizzaPage = require('../pages/PizzaPage.js')
-const assert = require('assert');
 
 describe('Home Page', () => {
 

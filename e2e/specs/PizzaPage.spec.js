@@ -5,12 +5,13 @@ describe('Pizza Page', () => {
 
   beforeEach(async () => {
     await device.launchApp({newInstance: true});
-    await waitFor(element(by.id('button_text'))).toBeVisible().withTimeout(10000);
-    HomePage.tapShowModal();
-    await expect(PizzaPage.pizza_header).toBeVisible()
+
   });
 
   it('2 words should be translated as 🍕 🍕', async () => {
+    await waitFor(element(by.id('button_text'))).toBeVisible().withTimeout(10000);
+    HomePage.tapShowModal();
+    await expect(PizzaPage.pizza_header).toBeVisible()
     PizzaPage.typeText('My Text Malformed');
     await expect(PizzaPage.pizza_translation).toHaveText('🍕 🍕');
   });
